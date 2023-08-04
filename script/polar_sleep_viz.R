@@ -1,5 +1,6 @@
 # Visualising the sleep stage percentages for 130 subjects
 # Author @Rahul Venugopal
+# Commenting in detail on August 4th 2023
 
 # Loading libraries
 library(dplyr)
@@ -22,8 +23,9 @@ df <- data.frame(
 )
 
 # Load data
-data <-read.csv("sleep_data.csv")
+data <-read.csv("data/sleep_data.csv")
 
+# Change the format to to long (tidy) from wide format
 data_new <- data %>% gather(sleep_stage,percentage,N1Percent:N3Percent)
 
 # creating labels first
@@ -34,7 +36,7 @@ label_data2$id <- c(1:nrow(label_data2))
 
 # calculate the ANGLE of the labels
 number_of_bar <- nrow(label_data2)
-angle <-  90 - 360 * ( label_data2$id-.5 )  /number_of_bar    
+angle <-  90 - 360 * (label_data2$id-0.5)  /number_of_bar
 
 label_data2$hjust<-ifelse( angle < -90, 1, 0)
 
@@ -100,7 +102,7 @@ ggplot( aes(fill=as.factor(sleep_stage), y=percentage, x=UUID)) +
   labs(caption = '**Visualisation:** Rahul Venugopal <br>')
   
 # load the logo
-  image_loc = readPNG("sleeping.png")
+  image_loc = readPNG("data/sleeping.png")
   
   ggdraw(sleep_plot) + 
   
@@ -123,7 +125,7 @@ ggplot( aes(fill=as.factor(sleep_stage), y=percentage, x=UUID)) +
              arrow = arrow(length = unit(2, "mm")))
   
 #save
-ggsave("sleep_stages.pdf",
+ggsave("images/sleep_stages.pdf",
        width = 5,
        height = 5,
        units="in",
