@@ -65,7 +65,7 @@ sleep_plot <- data_new %>%
   
   # remove axes and turn polar
   theme_void() +
-  theme(legend.position = c(0.57,0.49),
+  theme(legend.position = c(0.57,0.525),
         legend.key.size = unit(0.4, units = "cm"),
         legend.title = element_blank(),
         legend.text = element_text(colour="white", size=6, 
