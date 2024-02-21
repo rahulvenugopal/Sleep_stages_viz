@@ -76,7 +76,7 @@ sleep_plot <- data_new %>%
   scale_fill_manual(values=pal)+
   
   labs(subtitle = "The sleep efficiency (in %) is added above each subject",
-    title = 'Macro sleep architecture during a nap in <b style="color:#FFD700;">Meditator</b> and <b style="color:#ffffff;">Control</b> subjects') + 
+    title = 'Macro sleep architecture during sleep in <b style="color:#FFD700;">Meditators</b> and <b style="color:#ffffff;">Controls</b> subjects') + 
   
   # add ylim to keep empty circle in middle
   ylim(-120,120) +
