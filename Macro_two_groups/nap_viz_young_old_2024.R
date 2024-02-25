@@ -75,7 +75,7 @@ sleep_plot <- data_new %>%
   scale_x_discrete(limits=order)+
   scale_fill_manual(values=pal)+
   
-  labs(subtitle = "The sleep efficiency (in %) is added above each subject",
+  labs(subtitle = "The sleep efficiency (in %) is added above each subject (stacked vertical bar)",
     title = 'Macro sleep architecture during sleep in <b style="color:#FFD700;">Meditators</b> and <b style="color:#ffffff;">Controls</b> subjects') + 
   
   # add ylim to keep empty circle in middle
@@ -91,7 +91,8 @@ sleep_plot <- data_new %>%
         legend.title = element_blank(),
         legend.text = element_text(colour="white", size=6, 
                                    face="bold"),
-        plot.background = element_rect(fill="#516869"),
+        plot.background = element_rect(fill="#516869", color = NA),
+        # finally resolved the black line box around the plot with color=NA
         plot.title = element_markdown(lineheight = 1.1,
                                       size = 10,
                                       hjust = .1,
@@ -105,7 +106,7 @@ sleep_plot <- data_new %>%
         panel.border = element_blank()) + 
   
   # add efficiency labels
-  geom_text(data=data_viz, aes(x=id, y=110, label=round(SE,2), hjust=hjust), 
+  geom_text(data=data_viz, aes(x=id, y=110, label=format(round(SE,2), nmsall=2), hjust=hjust), 
             color = ifelse(data_viz$Group == 'MED', "#FFD700", "white"),
             fontface="bold",alpha=0.8, size=2.5, 
             angle= data_viz$angle, inherit.aes = FALSE) +
@@ -131,9 +132,11 @@ ggdraw(sleep_plot) +
 ggsave("sleep_stages.pdf",
        width = 5,
        height = 5,
+       bg = '#516869',
        units="in")
 
 ggsave("sleep_stages.png",
        width = 6,
        height = 6,
+       bg = '#516869',
        units="in")
